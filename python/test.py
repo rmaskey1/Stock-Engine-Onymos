@@ -113,6 +113,7 @@ class TestStockEngine(unittest.TestCase):
             price = round(price, 2)
             addOrder("BUY", ticker, price, quantity)
 
+        # Creating a Threadpool where each thread will execute a BUY order
         with ThreadPoolExecutor(max_workers=num_threads) as executor:
             futures = [executor.submit(worker) for i in range(num_threads)]
             for future in futures:
@@ -120,6 +121,7 @@ class TestStockEngine(unittest.TestCase):
         
         time.sleep(0.1)
 
+        # Checking to see that the BUY orders are in descending order
         current = orderbooks[ticker].buy_head
         count = 0
         prev_price = float('inf')
@@ -132,6 +134,7 @@ class TestStockEngine(unittest.TestCase):
             current = current.next
         print("Final BUY order list for ticker", ticker)
 
+        # Checking to see that all orders were added correctly
         current = orderbooks[ticker].buy_head
         while current is not None:
             print(current)
