@@ -13,23 +13,25 @@ public class Main {
     }
 
     public static void addOrder(String orderTypeStr, int ticker, double price, int quantity) {
+        // Checking for invalid tickers
         if (ticker < 0 || ticker >= MAX_TICKERS) {
             System.out.println("Invalid ticker");
             return;
         }
         Order.OrderType orderType = Order.OrderType.valueOf(orderTypeStr.toUpperCase());
         Order order = new Order(orderType, ticker, price, quantity);
-        orderBooks[ticker].insertOrder(order);
+        orderBooks[ticker].insertOrder(order); // See OrderBook.py for insertOrder implementation
         System.out.println("Order successfully added: " + order);
         matchOrder(ticker);
     }
 
     public static void matchOrder(int ticker) {
-        orderBooks[ticker].matchOrder();
+        orderBooks[ticker].matchOrder(); // See OrderBook.py for matchOrder implementation
     }
 
     public static void simulate(int orders) {
         for (int i = 0; i < orders; i++) {
+            // Randomizing order details
             String orderType = random.nextBoolean() ? "BUY" : "SELL";
             int ticker = random.nextInt(MAX_TICKERS);
             int quantity = random.nextInt(100) + 1;
