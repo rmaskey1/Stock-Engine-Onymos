@@ -2,7 +2,7 @@
 
 This project implements a simplified real-time stock trading engine in Python, capable of adding buy/sell orders, matching compatible orders in real-time, and handling concurrent access through lock-free data structures.
 
-## 📄 Project Files
+## Project Files
 
 - `main.py` — Entry point, contains logic to add orders and trigger matches.
 - `order.py` — Defines the `Order` class structure.
@@ -11,7 +11,7 @@ This project implements a simplified real-time stock trading engine in Python, c
 - `test.py` — Unit tests for validating the trading engine functionality and handling race conditions.
 - `demo.py` — Streamlit app for interactive live trading simulation and visualization.
 
-## 🚀 Requirements
+## Requirements
 
 - Python 3.8 or higher
 - Streamlit
