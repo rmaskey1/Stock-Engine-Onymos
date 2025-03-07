@@ -3,34 +3,32 @@ import java.util.concurrent.ThreadLocalRandom;
 public class RaceTest {
     public static void main(String[] args) throws InterruptedException {
         int ticker = 3;
-        // Reset the OrderBook for ticker 3.
+
         Main.orderBooks[ticker] = new OrderBook();
 
-        int numThreads = 50; // Use 50 threads
+        int numThreads = 50;
         Thread[] threads = new Thread[numThreads];
 
-        // Each thread will add one BUY order concurrently with a random price.
+        // Each thread will add one BUY order concurrently with a random price
         for (int i = 0; i < numThreads; i++) {
             threads[i] = new Thread(() -> {
                 int quantity = 10; // e.g., 10 shares per order
-                // Generate a random price between 90.00 and 110.00
                 double price = ThreadLocalRandom.current().nextDouble(90, 110);
-                // Round to two decimal places.
                 price = Math.round(price * 100.0) / 100.0;
                 Main.addOrder("BUY", ticker, price, quantity);
             });
         }
 
-        // Start all threads.
+        // Start all threads
         for (Thread t : threads) {
             t.start();
         }
-        // Wait for all threads to finish.
+        // Wait for all threads to finish
         for (Thread t : threads) {
             t.join();
         }
 
-        // Print the final BUY order list for ticker 3.
+        // Print the final BUY order list for ticker 3
         System.out.println("Final BUY order list for ticker " + ticker + ":");
         Order current = Main.orderBooks[ticker].getBuyHead().get();
         int count = 0;

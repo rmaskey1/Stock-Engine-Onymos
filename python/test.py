@@ -34,7 +34,7 @@ class TestStockEngine(unittest.TestCase):
         addOrder("BUY", ticker1, 100, 10)
         addOrder("SELL", ticker2, 100, 10)
 
-        self.assertIsNone(orderbooks[ticker1].buy_head)     # Head for buy orders should be None
+        self.assertIsNone(orderbooks[ticker1].buy_head)                         # Head for buy orders should be None
         self.assertRaises(IndexError, lambda: orderbooks[ticker2].sell_head)    # Head for buy orders should be None
     
     def test_full_match_matchOrder(self):
@@ -131,7 +131,7 @@ class TestStockEngine(unittest.TestCase):
             count += 1
             current = current.next
         print("Final BUY order list for ticker", ticker)
-        
+
         current = orderbooks[ticker].buy_head
         while current is not None:
             print(current)

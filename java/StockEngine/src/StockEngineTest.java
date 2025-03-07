@@ -85,6 +85,18 @@ public class StockEngineTest {
         // Expecting 50 - 20 = 30 shares remaining.
         assertEquals("Remaining SELL quantity should be 30", 30, remainingBuy.quantity.get());
     }
+
+    @Test
+    public void testNoMatch() {
+        int ticker = 1;
+
+        Main.addOrder("BUY", ticker, 100, 50);
+        Main.addOrder("SELL", ticker, 103, 50);
+        
+        // After full match, both order lists should be empty
+        assertNotNull("BUY head should NOT be null after full match", Main.orderBooks[ticker].getBuyHead().get());
+        assertNotNull("SELL head should NOT be null after full match", Main.orderBooks[ticker].getSellHead().get());
+    }
     
     @Test
     public void testRaceConditionConcurrentInsertion() throws InterruptedException {

@@ -39,11 +39,9 @@ def simulate(orders):
         base_price = 100
 
         if order_type == "BUY":
-            # price = base_price * (1 - random.uniform(0, 0.05))  # 0 to 5% positive deviation in buy orders
-            price = base_price - random.randint(0, 5)  # 0 to 5% positive deviation in buy orders
+            price = base_price * (1 - random.uniform(0, 0.05))  # 0 to 5% positive deviation in buy orders
         else:
-            # price = base_price * (1 + random.uniform(0, 0.05))  # 0 to 5% negative deviation in sell orders
-            price = base_price + random.randint(0, 5)  # 0 to 5% positive deviation in buy orders
+            price = base_price * (1 + random.uniform(0, 0.05))  # 0 to 5% negative deviation in sell orders
         price = round(price, 2)
         
         addOrder(order_type, ticker, price, quantity)
