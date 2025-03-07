@@ -29,3 +29,5 @@ pip install streamlit
   - Purely for demonstration purposes
   - Simulating all 1024 available tickers gives the program a very small chance to match orders
   - Simulating one ticker will allow more frequent order matches
+
+![image](https://github.com/user-attachments/assets/57133829-cf74-4da2-879b-a5b11b4deaf2)
