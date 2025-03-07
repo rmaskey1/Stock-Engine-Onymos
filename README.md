@@ -30,14 +30,14 @@ The main reason for keeping both implementations was to show both of my approach
   Maintains two sorted lists of orders:
   - **Buy Orders:** Stored in descending order (highest price first).
   - **Sell Orders:** Stored in ascending order (lowest price first).  
-  Matching is performed by comparing the highest buy and lowest sell orders, executing trades when conditions are met.
+  
   The OrderBooks are stored in a list where the index of the OrderBook represents the ticker of which those orders belong to.
 
 - **Adding Function:**
-  A new order is added to its respective OrderBook based on the ticker number and whether it's a BUY or SELL order. 
+  A new order is added to its respective OrderBook based on the ticker number and whether it's a BUY or SELL order. The main adding functionality is implemented in orderbook.py/OrderBook.java
 
 - **Matching Function:**  
-  When a new order is added, the engine checks if it can be matched with an opposing order. A match occurs if the buy order’s price is greater than or equal to the sell order’s price. Partial matches are allowed. Fully satisfied orders are removed from the order book and logged.
+  When a new order is added, the engine checks if it can be matched with an opposing order. A match occurs if the buy order’s price is greater than or equal to the sell order’s price. Partial matches are allowed. Fully satisfied orders are removed from the order book and logged. The main matching functionality is implemented in orderbook.py/OrderBook.java
 
 ### Concurrency & Lock-Free Design
 - **Python:**  
