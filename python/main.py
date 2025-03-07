@@ -17,21 +17,24 @@ for i in range(MAX_TICKERS):
 
 def addOrder(order_type, ticker, price, quantity):
 
+    # Checking for invalid tickers
     if ticker < 0 or ticker >= MAX_TICKERS:
         print("invalid ticker")
         return
     
     order = Order(order_type, ticker, price, quantity)
-    orderbooks[ticker].insert_order(order)
+    orderbooks[ticker].insert_order(order) # Check orderbook.py to see insert_order implementation
     print(f"Order successfully added: {order}")
 
     matchOrder(ticker)
 
 def matchOrder(ticker):
-    orderbooks[ticker].match_order()
+    orderbooks[ticker].match_order() # Check orderbook.py to see match_order implementation
 
 def simulate(orders):
     for i in range(orders):
+        
+        # Randomizing order details
         order_type = random.choice(["BUY", "SELL"])
         ticker = random.randint(0, MAX_TICKERS - 1)
         quantity = random.randint(1, 100)
