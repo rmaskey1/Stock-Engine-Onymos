@@ -12,6 +12,14 @@ Two separate implementations have been provided:
 - **Java Implementation:**  
   Leverages Java's atomic operations (`AtomicReference`, `compareAndSet`, etc.) to build a truly lock-free, concurrent order book. A set of JUnit tests is provided to validate the concurrency and matching logic.
 
+**Why?**
+
+Python can simulate a race condition solution with a lock-free data structure, but its Global Interpreter Lock (GIL) limits true thread parallelism. Python also does not allow access to hardware level instructions and data types, such as CompareAndSwap and atomic data types.
+
+Java, being a lower-level language, does give access to hardware level instructions and data types, allowing it to create a true lock-free design that handles the race conditions for parallel threads.
+
+The main reason for keeping both implementations was to show both of my approaches to the problem.
+
 ## Project Architecture
 
 ### Core Components
