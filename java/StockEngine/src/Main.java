@@ -20,13 +20,13 @@ public class Main {
         }
         Order.OrderType orderType = Order.OrderType.valueOf(orderTypeStr.toUpperCase());
         Order order = new Order(orderType, ticker, price, quantity);
-        orderBooks[ticker].insertOrder(order); // See OrderBook.py for insertOrder implementation
+        orderBooks[ticker].insertOrder(order); // See OrderBook.java for insertOrder implementation
         System.out.println("Order successfully added: " + order);
         matchOrder(ticker);
     }
 
     public static void matchOrder(int ticker) {
-        orderBooks[ticker].matchOrder(); // See OrderBook.py for matchOrder implementation
+        orderBooks[ticker].matchOrder(); // See OrderBook.java for matchOrder implementation
     }
 
     public static void simulate(int orders) {
