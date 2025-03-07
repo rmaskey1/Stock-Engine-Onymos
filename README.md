@@ -109,5 +109,5 @@ Two separate implementations have been provided:
 Onymos - Project Provider
 
 ## Contact
-GitHub: rmaskey1
-Email: maskey.reshaj@gmail.com
+- GitHub: rmaskey1
+- Email: maskey.reshaj@gmail.com
