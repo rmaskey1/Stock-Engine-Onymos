@@ -1,7 +1,3 @@
-
-
-# **Java Implementation README** (`README.md`)
-
 # Real-Time Stock Trading Engine (Java)
 
 This Java project provides a concurrent, real-time stock trading engine capable of adding buy/sell orders and matching orders in real-time. The engine handles concurrency effectively by leveraging Java's atomic operations and lock-free structures.
