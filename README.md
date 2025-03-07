@@ -14,7 +14,7 @@ Two separate implementations have been provided:
 
 **Why?**
 
-Python can simulate a race condition solution with a lock-free data structure, but its Global Interpreter Lock (GIL) limits true thread parallelism. Python also does not allow access to hardware level instructions and data types, such as CompareAndSwap and atomic data types.
+Python can simulate a race condition solution, but its Global Interpreter Lock (GIL) limits true thread parallelism. Python also does not allow access to hardware level instructions and data types, such as CompareAndSwap and atomic data types, meaning the lock-free data structure implementation isn't truly lock-free.
 
 Java, being a lower-level language, does give access to hardware level instructions and data types, allowing it to create a true lock-free design that handles the race conditions for parallel threads.
 
