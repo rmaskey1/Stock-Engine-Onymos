@@ -1,18 +1,25 @@
-## Getting Started
+# Real-Time Stock Trading Engine (Java)
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+This Java project provides a concurrent, real-time stock trading engine capable of adding buy/sell orders and matching orders in real-time. The engine handles concurrency effectively by leveraging Java's atomic operations and lock-free structures.
 
-## Folder Structure
+## Project Files
 
-The workspace contains two folders by default, where:
+- `Main.java` — Application entry point. Contains logic for order creation and matching.
+- `Order.java` — Defines the `Order` class with essential order properties.
+- `OrderBook.java` — Manages buy/sell orders using atomic operations for concurrent environments.
+- `StockEngineTest.java` — JUnit tests for validating functionality and concurrency handling.
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## Requirements
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- Java Development Kit (JDK) 8 or higher
+- JUnit 4 (Ensure your classpath includes JUnit libraries)
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## How to Run
 
-## Dependency Management
+### **Compile and Run the Application**
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+Navigate to the Java project's root directory in your terminal and compile:
+
+```bash
+javac Main.java Order.java OrderBook.java
+```
