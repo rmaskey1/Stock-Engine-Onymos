@@ -12,7 +12,7 @@ This Java project provides a concurrent, real-time stock trading engine capable 
 ## Requirements
 
 - Java Development Kit (JDK) 8 or higher
-- JUnit 4 or 5 (Ensure your classpath includes JUnit libraries)
+- JUnit 4 (Ensure your classpath includes JUnit libraries)
 
 ## How to Run
 
