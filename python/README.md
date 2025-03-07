@@ -21,6 +21,13 @@ Install Streamlit if you haven't already:
 pip install streamlit
 ```
 
+## Running the Demo
+
+To run the demo, simply use the command below in the terminal
+```bash
+streamlit run demo.py
+```  
+
 ## Interface
 
 - Choose how many order transactions to simulate and for which ticker
