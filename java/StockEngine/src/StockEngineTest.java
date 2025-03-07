@@ -34,8 +34,8 @@ public class StockEngineTest {
 
         Main.addOrder("BUY", ticker1, 100, 10);
         Main.addOrder("SELL", ticker2, 100, 10);
-        
 
+        // Head for buy and sell orders should be null
         assertNull("Order book for ticker 0 should be empty if no orders added", Main.orderBooks[0].getBuyHead().get());
         assertNull("Order book for ticker 0 should be empty if no orders added", Main.orderBooks[0].getSellHead().get());
     }
@@ -76,14 +76,14 @@ public class StockEngineTest {
         Main.addOrder("BUY", ticker, 103, 50);
         Main.addOrder("SELL", ticker, 100, 20);
         
-        // After matching:
         // The BUY order should be fully matched and removed.
         assertNull("SELL head should be null after partial match", Main.orderBooks[ticker].getSellHead().get());
-        // The SELL order should remain with leftover shares.
+        
+        // The BUY order should remain with leftover shares.
         Order remainingBuy = Main.orderBooks[ticker].getBuyHead().get();
-        assertNotNull("SELL head should not be null after partial match", remainingBuy);
+        assertNotNull("BUY head should not be null after partial match", remainingBuy);
         // Expecting 50 - 20 = 30 shares remaining.
-        assertEquals("Remaining SELL quantity should be 30", 30, remainingBuy.quantity.get());
+        assertEquals("Remaining BUY quantity should be 30", 30, remainingBuy.quantity.get());
     }
 
     @Test
@@ -105,6 +105,7 @@ public class StockEngineTest {
         Main.orderBooks[ticker] = new OrderBook();
         int numThreads = 50;
 
+        // Creating a Threadpool where each thread will execute a BUY order
         ExecutorService executor = Executors.newFixedThreadPool(numThreads);
         for (int i = 0; i < numThreads; i++) {
             executor.execute(() -> {
@@ -117,7 +118,7 @@ public class StockEngineTest {
         executor.shutdown();
         executor.awaitTermination(5, TimeUnit.SECONDS);
 
-        // Verify that the BUY orders for ticker 3 are sorted in descending order.
+        // Verify that the BUY orders for ticker 3 are sorted in descending order
         AtomicReference<Order> headRef = Main.orderBooks[ticker].getBuyHead();
         Order current = headRef.get();
         int count = 0;
@@ -131,7 +132,8 @@ public class StockEngineTest {
             count++;
             current = current.next.get();
         }
-        
+
+        // Verify that all of BUY orders were added to the list
         System.out.println("Final BUY order list for ticker " + ticker + ":");
         current = headRef.get();
         while (current != null) {
@@ -140,9 +142,9 @@ public class StockEngineTest {
         }
         System.out.println("Total orders in list: " + count);
         
-        // Assert that exactly 50 orders are present.
+        // Assert that exactly numThreads (50) orders are present
         assertEquals("Expected " + numThreads + " orders", numThreads, count);
-        // Assert that the orders are sorted in descending order.
+        // Assert that the orders are sorted in descending order
         assertTrue("Orders are not sorted in descending order", sortedDescending);
     }
 }
