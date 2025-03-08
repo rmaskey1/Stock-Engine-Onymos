@@ -6,8 +6,8 @@ public class OrderBook {
     private final AtomicReference<Order> sellHead;
 
     public OrderBook() {
-        this.buyHead = new AtomicReference<>(null);
-        this.sellHead = new AtomicReference<>(null);
+        this.buyHead = new AtomicReference<>(null);     // Linked list of BUY orders in descending order
+        this.sellHead = new AtomicReference<>(null);    // Linked list of SELL orders in descending order
     }
 
     public AtomicReference<Order> getBuyHead() {
@@ -30,12 +30,14 @@ public class OrderBook {
     private void insertBuyOrder(Order order) {
         while (true) {
             Order head = buyHead.get();
+            // If first order in list
             if (head == null || order.price > head.price) {
                 order.next.set(head);
                 if (buyHead.compareAndSet(head, order)) {
                     return;
                 }
             }
+            // Normal insert in descending order
             else {
                 Order pred = head;
                 Order curr = pred.next.get();
@@ -54,12 +56,14 @@ public class OrderBook {
     private void insertSellOrder(Order order) {
         while (true) {
             Order head = sellHead.get();
+            // If first order in list
             if (head == null || order.price < head.price) {
                 order.next.set(head);
                 if (sellHead.compareAndSet(head, order)) {
                     return;
                 }
             }
+            // Normal insert in ascending order
             else {
                 Order pred = head;
                 Order curr = pred.next.get();
@@ -92,8 +96,8 @@ public class OrderBook {
                 if (buyQty <= 0 || sellQty <= 0) {
                     break;
                 }
-                matchQty = Math.min(buyQty, sellQty);
-                if (buy.quantity.compareAndSet(buyQty, buyQty - matchQty)) {
+                matchQty = Math.min(buyQty, sellQty);     // Price at which order is matched
+                if (buy.quantity.compareAndSet(buyQty, buyQty - matchQty)) {    // Atomic function compareAndSet used to avoid interruption from other threads
                     if (sell.quantity.compareAndSet(sellQty, sellQty - matchQty)) {
                         System.out.println("[Ticker " + buy.ticker + "] Order matched: " + matchQty + " shares at $" + sell.price);
                         break;
@@ -103,9 +107,11 @@ public class OrderBook {
                 }
             }
 
+            // If all BUY order shares are satisfied
             if (buy.quantity.get() == 0) {
                 buyHead.compareAndSet(buy, (buy.next.get()));
             }
+            // If all SELL order shares are satisfied
             if (sell.quantity.get() == 0) {
                 sellHead.compareAndSet(sell, (sell.next.get()));
             }
